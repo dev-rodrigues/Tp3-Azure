@@ -24,10 +24,10 @@ namespace API.Controllers {
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IHttpActionResult> Register(AmigoBindModel model) {
+        public IHttpActionResult Register(AmigoBindModel model) {
             var amigo = new AmigoBindModel().CriarAmigo(model);
-            var cadastrou = await AmigoService.Salvar(amigo);
-            if(cadastrou) {
+            var cadastrou = AmigoService.Salvar(amigo);
+            if(cadastrou != null) {
                 return Ok();
             }
             return BadRequest();

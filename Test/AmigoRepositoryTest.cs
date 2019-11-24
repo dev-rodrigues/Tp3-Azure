@@ -21,14 +21,15 @@ namespace Test {
             var amigo = new Amigo();
             
             var amigoEncontrado = SalvarAmigoTest(amigo);
-            
-            Assert.AreEqual(amigo.Id, amigoEncontrado.Id);
+
+            Assert.IsNotNull(amigoEncontrado.Id);
         }
 
         [TestMethod]
         public void Deve_RetornarNome_Quando_SalvarAmigo() {
             var amigo = new Amigo();
             amigo.Nome = "carlos";
+            amigo.DataDeNascimento = DateTime.Now;
 
             var amigoEncontrado = SalvarAmigoTest(amigo);
 
@@ -36,8 +37,9 @@ namespace Test {
         }
 
         private Amigo SalvarAmigoTest(Amigo amigo) {
-            repositorio.Salvar(amigo);
-            return repositorio.Buscar(amigo.Id);
+            var amigo_salvo = repositorio.Salvar(amigo);
+            var amigo_buscado = repositorio.Buscar(amigo_salvo.Id);
+            return amigo_buscado;
         }
     }
 }

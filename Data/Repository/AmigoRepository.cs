@@ -19,6 +19,10 @@ namespace Data.Repository {
             this.connectionString = @"Server=tcp:azure-tp3.database.windows.net,1433;Initial Catalog=azure-tp3;Persist Security Info=False;User ID=httpsantos;Password=segredo.3#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
+        public Amigo Salvar(Amigo amigo) {
+            throw new NotImplementedException();
+        }
+
         public Amigo Buscar(int id) {
             var amigo = new Amigo();
 
@@ -35,6 +39,7 @@ namespace Data.Repository {
                 while(dr.Read()) {
                     amigo.Id = Convert.ToInt32(dr["Id"]);
                     amigo.Nome = dr["Nome"].ToString();
+                    amigo.Email = dr["SobreNome"].ToString();
                     amigo.Telefone = dr["Telefone"].ToString();
 
                     try {
@@ -42,24 +47,22 @@ namespace Data.Repository {
                     } catch {
                         amigo.DataDeNascimento = null;
                     }
-
                 }
             }
             return amigo;
-        }
+        }    
 
-        public async Task<bool> Salvar(Amigo amigo) {
-            var salvou = false;
+        public Amigo SalvarEF(Amigo amigo) {
             try {
                 using(var db = new DatabaseContext(connectionString)) {
                     db.Amigos.Add(amigo);
-                    await db.SaveChangesAsync();
-                    salvou = true;
+                    db.SaveChanges();
+                    return amigo;
                 }
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
-            return salvou;
+            return null;
         }
     }
 }

@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace Core.Repository {
     public interface IAmigo {
 
-        Task<bool> Salvar(Amigo amigo);
+        Amigo SalvarEF(Amigo amigo);
+
+        Amigo Salvar(Amigo amigo);
 
         Amigo Buscar(int id);
     }
