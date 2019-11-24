@@ -35,6 +35,14 @@ namespace Data.Repository {
                 while(dr.Read()) {
                     amigo.Id = Convert.ToInt32(dr["Id"]);
                     amigo.Nome = dr["Nome"].ToString();
+                    amigo.Telefone = dr["Telefone"].ToString();
+
+                    try {
+                        amigo.DataDeNascimento = Convert.ToDateTime(dr["DataDeNascimento"]);
+                    } catch {
+                        amigo.DataDeNascimento = null;
+                    }
+
                 }
             }
             return amigo;
