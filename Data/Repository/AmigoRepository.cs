@@ -20,7 +20,28 @@ namespace Data.Repository {
         }
 
         public Amigo Salvar(Amigo amigo) {
-            throw new NotImplementedException();
+            var id = 0;
+
+            using(SqlConnection conn = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Amigo_Insert";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Nome", amigo.Nome);
+                cmd.Parameters.AddWithValue("Telefone", amigo.Telefone);
+                cmd.Parameters.AddWithValue("DataDeNascimento", amigo.DataDeNascimento);
+                conn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while(dr.Read()) {
+                    id = Convert.ToInt32(dr["Id"]);
+                }
+            }
+
+            var amigo_salvo = Buscar(id);
+
+            return amigo_salvo;
         }
 
         public Amigo Buscar(int id) {

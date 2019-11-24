@@ -26,6 +26,7 @@ namespace API.Controllers {
         [HttpPost]
         public IHttpActionResult Register(AmigoBindModel model) {
             var amigo = new AmigoBindModel().CriarAmigo(model);
+            //var cadastrou = AmigoService.Salvar(amigo);
             var cadastrou = AmigoService.Salvar(amigo);
             if(cadastrou != null) {
                 return Ok();
