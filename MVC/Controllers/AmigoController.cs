@@ -113,18 +113,39 @@ namespace MVC.Controllers
 
         // POST: Amigo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(int id, FormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var data = new Dictionary<string, string> {
+                    { "Nome", collection["Nome"] },
+                    { "Sobrenome", collection["Sobrenome"] },
+                    { "Email", collection["Email"] },
+                    { "Telefone", collection["Telefone"] },
+                    { "Aniversario", collection["Aniversario"] }
+                };
 
-                return RedirectToAction("Index");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(base_url);
+
+                    using (var requestContent = new FormUrlEncodedContent(data))
+                    {
+                        var response = await client.PutAsync("api/amigo/editar", requestContent);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            return View();
+                        }
+                    }
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Amigo/Delete/5
