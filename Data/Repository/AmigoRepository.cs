@@ -82,15 +82,15 @@ namespace Data.Repository {
                 cmd.CommandText = "Amigo_Update";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("Id", amigo.Id);
-                cmd.Parameters.AddWithValue("Nome", amigo.Id);
+                cmd.Parameters.AddWithValue("Nome", amigo.Nome);
+                cmd.Parameters.AddWithValue("SobreNome", amigo.SobreNome);
+                cmd.Parameters.AddWithValue("Email", amigo.Email);
                 cmd.Parameters.AddWithValue("Telefone", amigo.Telefone);
                 cmd.Parameters.AddWithValue("DataDeNascimento", amigo.DataDeNascimento);
                 conn.Open();
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
-
             var amigo_editado = Buscar(amigo.Id);
-
             return amigo_editado;
         }
 
