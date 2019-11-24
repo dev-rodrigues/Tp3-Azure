@@ -10,6 +10,8 @@ namespace Core.Repository {
 
         Amigo SalvarEF(Amigo amigo);
 
+        List<Amigo> Listar();
+
         Amigo Salvar(Amigo amigo);
 
         Amigo Editar(Amigo amigo);

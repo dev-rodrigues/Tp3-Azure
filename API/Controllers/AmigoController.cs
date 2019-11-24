@@ -24,6 +24,17 @@ namespace API.Controllers {
         private IAmigo AmigoService = ServiceLocator.GetInstanceOf<AmigoRepository>();
 
         [AllowAnonymous]
+        [HttpGet]
+        public IHttpActionResult Listar() {
+
+            var amigos = AmigoService.Listar();
+            if(amigos != null) {
+                return Ok(amigos);
+            }
+            return BadRequest();
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public IHttpActionResult Register(AmigoBindModel model) {
             var amigo = new AmigoBindModel().CriarAmigo(model);

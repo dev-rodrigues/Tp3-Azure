@@ -75,6 +75,39 @@ namespace Data.Repository {
             return amigo;
         }
 
+        public List<Amigo> Listar() {
+            List<Amigo> amigos = new List<Amigo>();
+
+            using(SqlConnection conn = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Amigo_Listar";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                conn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while(dr.Read()) {
+                    var amigo = new Amigo();
+
+                    amigo.Id = Convert.ToInt32(dr["Id"]);
+                    amigo.Nome = dr["Nome"].ToString();
+                    amigo.Email = dr["SobreNome"].ToString();
+                    amigo.Telefone = dr["Telefone"].ToString();
+
+                    try {
+                        amigo.DataDeNascimento = Convert.ToDateTime(dr["DataDeNascimento"]);
+                    } catch {
+                        amigo.DataDeNascimento = null;
+                    }
+                    amigos.Add(amigo);
+                }
+            }
+
+            return amigos;
+        }
+
         public Amigo Editar(Amigo amigo) {
             using(SqlConnection conn = new SqlConnection(connectionString)) {
                 SqlCommand cmd = new SqlCommand();
