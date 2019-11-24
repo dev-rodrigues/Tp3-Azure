@@ -71,7 +71,20 @@ namespace Data.Repository {
                 }
             }
             return amigo;
-        }    
+        }
+
+        public void Apagar(int Id) {
+            using(SqlConnection conn = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Amigo_Delete";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Id", Id);
+                conn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+        }
 
         public Amigo SalvarEF(Amigo amigo) {
             try {

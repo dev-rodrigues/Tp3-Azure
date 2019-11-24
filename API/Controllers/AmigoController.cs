@@ -26,7 +26,6 @@ namespace API.Controllers {
         [HttpPost]
         public IHttpActionResult Register(AmigoBindModel model) {
             var amigo = new AmigoBindModel().CriarAmigo(model);
-            //var cadastrou = AmigoService.Salvar(amigo);
             var cadastrou = AmigoService.Salvar(amigo);
             if(cadastrou != null) {
                 return Ok();
@@ -40,6 +39,14 @@ namespace API.Controllers {
             var amigo = AmigoService.Buscar(id);
 
             return Ok(amigo);
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        public IHttpActionResult DeleteById(int id) {
+            AmigoService.Apagar(id);
+
+            return Ok();
         }
     }
 }
