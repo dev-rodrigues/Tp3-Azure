@@ -37,11 +37,15 @@ namespace API.Models {
             return amigo;
         }
 
+        public Amigo CriarAmigo() {
+            return new Amigo();
+        }
+
         private DateTime ConverteData(int[] anoMesDia) {
             var ano = Convert.ToInt32(anoMesDia[0]);
             var mes = Convert.ToInt32(anoMesDia[1]);
             var dia = Convert.ToInt32(anoMesDia[2]);
-            DateTime data = new DateTime(ano,mes,dia);
+            DateTime data = new DateTime(ano, mes, dia);
             return data;
         }
     }

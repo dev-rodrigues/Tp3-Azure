@@ -29,5 +29,10 @@ namespace Core.Model {
         public DateTime? DataDeNascimento {
             get; set;
         }
+
+        public Amigo() {
+
+        }
+
     }
 }
