@@ -28,6 +28,8 @@ namespace Data.Repository {
                 cmd.CommandText = "Amigo_Insert";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("Nome", amigo.Nome);
+                cmd.Parameters.AddWithValue("SobreNome", amigo.SobreNome);
+                cmd.Parameters.AddWithValue("Email", amigo.Email);
                 cmd.Parameters.AddWithValue("Telefone", amigo.Telefone);
                 cmd.Parameters.AddWithValue("DataDeNascimento", amigo.DataDeNascimento);
                 conn.Open();
