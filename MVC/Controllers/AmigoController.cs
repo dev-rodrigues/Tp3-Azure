@@ -70,6 +70,7 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
+
             if (ModelState.IsValid)
             {
                 var data = new Dictionary<string, string> {
@@ -77,7 +78,7 @@ namespace MVC.Controllers
                     { "Sobrenome", collection["Sobrenome"] },
                     { "Email", collection["Email"] },
                     { "Telefone", collection["Telefone"] },
-                    { "Aniversario", collection["Aniversario"] },
+                    { "Aniversario", collection["Aniversario"] }
                 };
 
                 using (var client = new HttpClient())

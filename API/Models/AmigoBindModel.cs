@@ -22,7 +22,7 @@ namespace API.Models {
             get; set;
         }
 
-        public int[] Aniversario {
+        public string Aniversario {
             get; set;
         }
 
@@ -41,10 +41,12 @@ namespace API.Models {
             return new Amigo();
         }
 
-        private DateTime ConverteData(int[] anoMesDia) {
-            var ano = Convert.ToInt32(anoMesDia[0]);
+        private DateTime ConverteData(string aniversarioString) {
+            var anoMesDia = aniversarioString.Split('/');
+
+            var ano = Convert.ToInt32(anoMesDia[2]);
             var mes = Convert.ToInt32(anoMesDia[1]);
-            var dia = Convert.ToInt32(anoMesDia[2]);
+            var dia = Convert.ToInt32(anoMesDia[0]);
             DateTime data = new DateTime(ano, mes, dia);
             return data;
         }
