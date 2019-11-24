@@ -12,6 +12,8 @@ namespace Core.Repository {
 
         Amigo Salvar(Amigo amigo);
 
+        Amigo Editar(Amigo amigo);
+
         void Apagar(int Id);
 
         Amigo Buscar(int id);

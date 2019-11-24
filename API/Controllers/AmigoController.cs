@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using API.Service;
+using Core.Model;
 using Core.Repository;
 using Data.Repository;
 using System;
@@ -39,6 +40,16 @@ namespace API.Controllers {
             var amigo = AmigoService.Buscar(id);
 
             return Ok(amigo);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IHttpActionResult EditById(int id, AmigoBindModel inputModel) {
+            var amigo = new AmigoBindModel().CriarAmigo(inputModel);
+            amigo.Id = id;
+
+            var amigo_editado = AmigoService.Editar(amigo);
+            return Ok(amigo_editado);
         }
 
         [AllowAnonymous]

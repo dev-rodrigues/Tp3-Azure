@@ -73,6 +73,25 @@ namespace Data.Repository {
             return amigo;
         }
 
+        public Amigo Editar(Amigo amigo) {
+            using(SqlConnection conn = new SqlConnection(connectionString)) {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Amigo_Update";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Id", amigo.Id);
+                cmd.Parameters.AddWithValue("Nome", amigo.Id);
+                cmd.Parameters.AddWithValue("Telefone", amigo.Telefone);
+                cmd.Parameters.AddWithValue("DataDeNascimento", amigo.DataDeNascimento);
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+
+            var amigo_editado = Buscar(amigo.Id);
+
+            return amigo_editado;
+        }
+
         public void Apagar(int Id) {
             using(SqlConnection conn = new SqlConnection(connectionString)) {
                 SqlCommand cmd = new SqlCommand();
