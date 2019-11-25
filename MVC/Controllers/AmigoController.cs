@@ -19,7 +19,7 @@ namespace MVC.Controllers {
 
                 using(var client = new HttpClient()) {
                     client.BaseAddress = new Uri(base_url);
-                    var response = await client.GetAsync($"api/amigo/listar");
+                    var response = await client.GetAsync($"api/amigo");
 
                     if(response.IsSuccessStatusCode) {
                         var responseContent = await response.Content.ReadAsStringAsync();
@@ -38,7 +38,7 @@ namespace MVC.Controllers {
             using(var cliente = new HttpClient()) {
                 cliente.BaseAddress = new Uri(base_url);
 
-                var response = await cliente.GetAsync($"/api/amigo/buscar?id={id}");
+                var response = await cliente.GetAsync($"/api/amigo/{id}");
 
                 if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
@@ -73,8 +73,14 @@ namespace MVC.Controllers {
                 using(var client = new HttpClient()) {
                     client.BaseAddress = new Uri(base_url);
 
+<<<<<<< HEAD
                     using(var requestContent = new FormUrlEncodedContent(data)) {
                         var response = await client.PostAsync("api/amigo/registrar", requestContent);
+=======
+                    using (var requestContent = new FormUrlEncodedContent(data))
+                    {
+                        var response = await client.PostAsync("api/amigo", requestContent);
+>>>>>>> d72f82ea4b4010477646176755e721ed7ed1e153
 
                         if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
