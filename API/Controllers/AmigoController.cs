@@ -24,7 +24,6 @@ namespace API.Controllers {
         private IAmigo AmigoService = ServiceLocator.GetInstanceOf<AmigoRepository>();
 
         [AllowAnonymous]
-        [Route("listar")]
         [HttpGet]
         public IHttpActionResult Listar() {
 
@@ -36,7 +35,6 @@ namespace API.Controllers {
         }
 
         [AllowAnonymous]
-        [Route("registrar")]
         [HttpPost]
         public IHttpActionResult Register(AmigoBindModel model) {
             var amigo = new AmigoBindModel().CriarAmigo(model);
@@ -48,7 +46,6 @@ namespace API.Controllers {
         }
 
         [AllowAnonymous]
-        [Route("buscar")]
         [HttpGet]
         public IHttpActionResult FindById(int id) {
             var amigo = AmigoService.Buscar(id);
@@ -57,7 +54,6 @@ namespace API.Controllers {
         }
 
         [AllowAnonymous]
-        [Route("editar")]
         [HttpPost]
         public IHttpActionResult EditById(int id, AmigoBindModel inputModel) {
             var amigo = new AmigoBindModel().CriarAmigo(inputModel);
@@ -68,7 +64,6 @@ namespace API.Controllers {
         }
 
         [AllowAnonymous]
-        [Route("deletar")]
         [HttpDelete]
         public IHttpActionResult DeleteById(int id) {
             AmigoService.Apagar(id);
