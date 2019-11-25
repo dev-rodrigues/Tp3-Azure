@@ -101,7 +101,7 @@ namespace MVC.Controllers {
                     client.BaseAddress = new Uri(base_url);
 
                     using(var requestContent = new FormUrlEncodedContent(data)) {
-                        var response = await client.PutAsync($"api/amigo/editar?{id}", requestContent);
+                        var response = await client.PutAsync($"api/amigo/editar?id={id}", requestContent);
 
                         if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
