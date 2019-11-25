@@ -8,25 +8,20 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MVC.Controllers
-{
-    public class AmigoController : Controller
-    {
+namespace MVC.Controllers {
+    public class AmigoController : Controller {
         private static string base_url = "http://localhost:60494";
 
         // GET: Amigo
-        public async Task<ActionResult> Index()
-        {
+        public async Task<ActionResult> Index() {
             {
                 List<AmigoViewModel> profiles = new List<AmigoViewModel>();
 
-                using (var client = new HttpClient())
-                {
+                using(var client = new HttpClient()) {
                     client.BaseAddress = new Uri(base_url);
                     var response = await client.GetAsync($"api/amigo");
 
-                    if (response.IsSuccessStatusCode)
-                    {
+                    if(response.IsSuccessStatusCode) {
                         var responseContent = await response.Content.ReadAsStringAsync();
                         profiles = JsonConvert.DeserializeObject<List<AmigoViewModel>>(responseContent);
                     }
@@ -35,18 +30,15 @@ namespace MVC.Controllers
             }
         }
 
-        public async Task<ActionResult> Details(int id)
-        {
+        public async Task<ActionResult> Details(int id) {
             AmigoViewModel amigoView = new AmigoViewModel();
 
-            using (var cliente = new HttpClient())
-            {
+            using(var cliente = new HttpClient()) {
                 cliente.BaseAddress = new Uri(base_url);
 
                 var response = await cliente.GetAsync($"/api/amigo/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigoView = JsonConvert.DeserializeObject<AmigoViewModel>(responseContent);
@@ -57,17 +49,14 @@ namespace MVC.Controllers
             }
         }
 
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(FormCollection collection)
-        {
+        public async Task<ActionResult> Create(FormCollection collection) {
 
-            if (ModelState.IsValid)
-            {
+            if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "Nome", collection["Nome"] },
                     { "Sobrenome", collection["Sobrenome"] },
@@ -76,20 +65,15 @@ namespace MVC.Controllers
                     { "Aniversario", collection["Aniversario"] }
                 };
 
-                using (var client = new HttpClient())
-                {
+                using(var client = new HttpClient()) {
                     client.BaseAddress = new Uri(base_url);
 
-                    using (var requestContent = new FormUrlEncodedContent(data))
-                    {
+                    using(var requestContent = new FormUrlEncodedContent(data)) {
                         var response = await client.PostAsync("api/amigo", requestContent);
 
-                        if (response.IsSuccessStatusCode)
-                        {
+                        if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
-                        }
-                        else
-                        {
+                        } else {
                             return View("Error");
                         }
                     }
@@ -98,18 +82,15 @@ namespace MVC.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Edit(int id)
-        {
+        public async Task<ActionResult> Edit(int id) {
             AmigoViewModel amigoView = new AmigoViewModel();
 
-            using (var cliente = new HttpClient())
-            {
+            using(var cliente = new HttpClient()) {
                 cliente.BaseAddress = new Uri(base_url);
 
                 var response = await cliente.GetAsync($"/api/amigo/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigoView = JsonConvert.DeserializeObject<AmigoViewModel>(responseContent);
@@ -122,11 +103,9 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(int id, FormCollection collection)
-        {
+        public async Task<ActionResult> Edit(int id, FormCollection collection) {
 
-            if (ModelState.IsValid)
-            {
+            if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "Nome", collection["Nome"] },
                     { "Sobrenome", collection["Sobrenome"] },
@@ -135,20 +114,15 @@ namespace MVC.Controllers
                     { "Aniversario", collection["Aniversario"] }
                 };
 
-                using (var client = new HttpClient())
-                {
+                using(var client = new HttpClient()) {
                     client.BaseAddress = new Uri(base_url);
 
-                    using (var requestContent = new FormUrlEncodedContent(data))
-                    {
+                    using(var requestContent = new FormUrlEncodedContent(data)) {
                         var response = await client.PutAsync($"api/amigo/editar?id={id}", requestContent);
 
-                        if (response.IsSuccessStatusCode)
-                        {
+                        if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
-                        }
-                        else
-                        {
+                        } else {
                             return View();
                         }
                     }
@@ -158,22 +132,15 @@ namespace MVC.Controllers
             return View();
         }
 
-        //public ActionResult Delete(int id) {
-        //    return View();
-        //}
-
-        public async Task<ActionResult> Delete(int id)
-        {
+        public async Task<ActionResult> Delete(int id) {
             AmigoViewModel amigoView = new AmigoViewModel();
 
-            using (var cliente = new HttpClient())
-            {
+            using(var cliente = new HttpClient()) {
                 cliente.BaseAddress = new Uri(base_url);
 
                 var response = await cliente.GetAsync($"/api/amigo/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
 
                     amigoView = JsonConvert.DeserializeObject<AmigoViewModel>(responseContent);
@@ -182,71 +149,21 @@ namespace MVC.Controllers
                 }
                 return View();
             }
-
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(int id, FormCollection collection)
-        {
-            //api / Amigo /{ id}
-
-            using (var cliente = new HttpClient())
-            {
+        public async Task<ActionResult> Delete(int id, FormCollection collection) {
+            using(var cliente = new HttpClient()) {
                 cliente.BaseAddress = new Uri(base_url);
 
                 var response = await cliente.DeleteAsync($"/api/amigo/{id}");
 
-                if (response.IsSuccessStatusCode)
-                {
+                if(response.IsSuccessStatusCode) {
                     return RedirectToAction("Index");
 
                 }
                 return View();
             }
-
-            //if (ModelState.IsValid)
-            //{
-            //var data = new Dictionary<string, string> {
-            //    { "Nome", collection["Nome"] },
-            //    { "Sobrenome", collection["Sobrenome"] },
-            //    { "Email", collection["Email"] },
-            //    { "Telefone", collection["Telefone"] },
-            //    { "Aniversario", collection["Aniversario"] }
-            //};
-
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri(base_url);
-
-            //    using (var requestContent = new FormUrlEncodedContent(data))
-            //    {
-            //        var response = await client.DeleteAsync($"api/amigo/editar?id={id}", requestContent);
-
-            //        if (response.IsSuccessStatusCode)
-            //        {
-            //            return RedirectToAction("Index");
-            //        }
-            //        else
-            //        {
-            //            return View();
-            //        }
-            //    }
-            //}
-            //}
-
-            return View();
         }
-
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection) {
-
-
-        //    try {
-
-        //        return RedirectToAction("Index");
-        //    } catch {
-        //        return View();
-        //    }
-        //}
     }
 }
