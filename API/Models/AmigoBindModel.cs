@@ -32,7 +32,7 @@ namespace API.Models {
                 SobreNome = inputModel.SobreNome,
                 Email = inputModel.Email,
                 Telefone = inputModel.Telefone,
-                DataDeNascimento = ConverteData(inputModel.Aniversario)
+                DataDeNascimento = Convert.ToDateTime(inputModel.Aniversario)
             };
             return amigo;
         }

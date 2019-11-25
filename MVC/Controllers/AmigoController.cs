@@ -82,12 +82,30 @@ namespace MVC.Controllers {
             return View();
         }
 
-        public ActionResult Edit(int id) {
+        public async Task<ActionResult> Edit(int id) {
+            AmigoViewModel amigoView = new AmigoViewModel();
+
+            using(var cliente = new HttpClient()) {
+                cliente.BaseAddress = new Uri(base_url);
+
+                var response = await cliente.GetAsync($"/api/amigo/{id}");
+
+                if(response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    amigoView = JsonConvert.DeserializeObject<AmigoViewModel>(responseContent);
+
+                    return View(amigoView);
+                }
+                return View();
+            }
+
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> Edit(int id, FormCollection collection) {
+
             if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "Nome", collection["Nome"] },

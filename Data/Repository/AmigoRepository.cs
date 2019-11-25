@@ -120,7 +120,7 @@ namespace Data.Repository {
                 cmd.Parameters.AddWithValue("SobreNome", amigo.SobreNome);
                 cmd.Parameters.AddWithValue("Email", amigo.Email);
                 cmd.Parameters.AddWithValue("Telefone", amigo.Telefone);
-                cmd.Parameters.AddWithValue("DataDeNascimento", amigo.DataDeNascimento);
+                cmd.Parameters.AddWithValue("DataDeNascimento", DateTime.Now);
                 conn.Open();
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
