@@ -23,7 +23,7 @@ namespace MVC.Controllers
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(base_url);
-                    var response = await client.GetAsync($"api/amigo/listar");
+                    var response = await client.GetAsync($"api/amigo");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -45,7 +45,7 @@ namespace MVC.Controllers
             {
                 cliente.BaseAddress = new Uri(base_url);
 
-                var response = await cliente.GetAsync($"/api/amigo/buscar?id={id}");
+                var response = await cliente.GetAsync($"/api/amigo/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -87,7 +87,7 @@ namespace MVC.Controllers
 
                     using (var requestContent = new FormUrlEncodedContent(data))
                     {
-                        var response = await client.PostAsync("api/amigo/registrar", requestContent);
+                        var response = await client.PostAsync("api/amigo", requestContent);
 
                         if (response.IsSuccessStatusCode)
                         {
@@ -112,7 +112,7 @@ namespace MVC.Controllers
         }
 
         // POST: Amigo/Edit/5
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult> Edit(int id, FormCollection collection)
         {
             if (ModelState.IsValid)
@@ -131,7 +131,7 @@ namespace MVC.Controllers
 
                     using (var requestContent = new FormUrlEncodedContent(data))
                     {
-                        var response = await client.PutAsync("api/amigo/editar", requestContent);
+                        var response = await client.PutAsync($"api/amigo/{id}", requestContent);
 
                         if (response.IsSuccessStatusCode)
                         {
