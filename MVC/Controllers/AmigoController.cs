@@ -26,12 +26,10 @@ namespace MVC.Controllers {
                         profiles = JsonConvert.DeserializeObject<List<AmigoViewModel>>(responseContent);
                     }
                 }
-
                 return View(profiles);
             }
         }
 
-        // GET: Amigo/Details/5
         public async Task<ActionResult> Details(int id) {
             AmigoViewModel amigoView = new AmigoViewModel();
 
@@ -47,17 +45,14 @@ namespace MVC.Controllers {
 
                     return View(amigoView);
                 }
-
                 return View();
             }
         }
 
-        // GET: Amigo/Create
         public ActionResult Create() {
             return View();
         }
 
-        // POST: Amigo/Create
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection) {
 
@@ -74,7 +69,7 @@ namespace MVC.Controllers {
                     client.BaseAddress = new Uri(base_url);
 
                     using(var requestContent = new FormUrlEncodedContent(data)) {
-                        var response = await client.PostAsync("api/amigo/registrar", requestContent);
+                        var response = await client.PostAsync("api/amigo", requestContent);
 
                         if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
@@ -84,17 +79,13 @@ namespace MVC.Controllers {
                     }
                 }
             }
-
             return View();
-
         }
 
-        // GET: Amigo/Edit/5
         public ActionResult Edit(int id) {
             return View();
         }
 
-        // POST: Amigo/Edit/5
         [HttpPost]
         public async Task<ActionResult> Edit(int id, FormCollection collection) {
             if(ModelState.IsValid) {
@@ -110,7 +101,7 @@ namespace MVC.Controllers {
                     client.BaseAddress = new Uri(base_url);
 
                     using(var requestContent = new FormUrlEncodedContent(data)) {
-                        var response = await client.PutAsync($"api/amigo/editar/{id}", requestContent);
+                        var response = await client.PutAsync($"api/amigo/editar?{id}", requestContent);
 
                         if(response.IsSuccessStatusCode) {
                             return RedirectToAction("Index");
@@ -124,16 +115,13 @@ namespace MVC.Controllers {
             return View();
         }
 
-        // GET: Amigo/Delete/5
         public ActionResult Delete(int id) {
             return View();
         }
 
-        // POST: Amigo/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection) {
             try {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             } catch {
