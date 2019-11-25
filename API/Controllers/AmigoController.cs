@@ -54,12 +54,8 @@ namespace API.Controllers {
         }
 
         [AllowAnonymous]
-<<<<<<< HEAD
         [Route("editar")]
         [HttpPut]
-=======
-        [HttpPost]
->>>>>>> d72f82ea4b4010477646176755e721ed7ed1e153
         public IHttpActionResult EditById(int id, AmigoBindModel inputModel) {
             var amigo = new AmigoBindModel().CriarAmigo(inputModel);
             amigo.Id = id;
