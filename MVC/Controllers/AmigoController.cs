@@ -59,7 +59,7 @@ namespace MVC.Controllers {
             if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "Nome", collection["Nome"] },
-                    { "Sobrenome", collection["Sobrenome"] },
+                    { "SobreNome", collection["SobreNome"] },
                     { "Email", collection["Email"] },
                     { "Telefone", collection["Telefone"] },
                     { "Aniversario", collection["Aniversario"] }
@@ -108,7 +108,7 @@ namespace MVC.Controllers {
             if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "Nome", collection["Nome"] },
-                    { "Sobrenome", collection["Sobrenome"] },
+                    { "SobreNome", collection["SobreNome"] },
                     { "Email", collection["Email"] },
                     { "Telefone", collection["Telefone"] },
                     { "Aniversario", collection["Aniversario"] }
