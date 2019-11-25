@@ -112,7 +112,7 @@ namespace MVC.Controllers
         }
 
         // POST: Amigo/Edit/5
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult> Edit(int id, FormCollection collection)
         {
             if (ModelState.IsValid)
@@ -131,7 +131,7 @@ namespace MVC.Controllers
 
                     using (var requestContent = new FormUrlEncodedContent(data))
                     {
-                        var response = await client.PutAsync($"api/amigo/{id}", requestContent);
+                        var response = await client.PutAsync($"api/Amigo/{id}", requestContent);
 
                         if (response.IsSuccessStatusCode)
                         {
