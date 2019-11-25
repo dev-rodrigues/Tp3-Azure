@@ -62,7 +62,8 @@ namespace Data.Repository {
                 while(dr.Read()) {
                     amigo.Id = Convert.ToInt32(dr["Id"]);
                     amigo.Nome = dr["Nome"].ToString();
-                    amigo.Email = dr["SobreNome"].ToString();
+                    amigo.SobreNome = dr["SobreNome"].ToString();
+                    amigo.Email = dr["Email"].ToString();
                     amigo.Telefone = dr["Telefone"].ToString();
 
                     try {
