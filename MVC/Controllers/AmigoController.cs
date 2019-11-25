@@ -100,7 +100,6 @@ namespace MVC.Controllers {
                 return View();
             }
 
-            return View();
         }
 
         [HttpPost]
